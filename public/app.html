@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言板</title>
+    <style>
+        .main {
+            width: 350px;
+            margin: 100px auto;
+            text-align: center;
+
+        }
+
+        li {
+            list-style: none;
+            display: flex;
+            margin: 10px;
+        }
+
+        li span {
+            width: 80px;
+        }
+
+        .submit {
+            justify-content: space-around;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <h4>班级留言板</h4>
+        <ul>
+            <li>
+                <span>留言标题</span>
+                <input type="text" id="title">
+            </li>
+            <li>
+                <span>留言内容</span>
+                <textarea id="content"></textarea>
+            </li>
+            <li>
+                <span>留言时间</span>
+                <label id="time"></label>
+            </li>
+            <li class="submit">
+                <button id="submit">提交留言</button>
+                <a href="./word.html">查看留言</a>
+            </li>
+        </ul>
+    </div>
+    <script>
+        const timeDom = document.getElementById('time');
+        timeDom.innerHTML = new Date().toLocaleString();
+        const title = document.getElementById('title');
+        const content = document.getElementById('content');
+        const submit = document.getElementById('submit')
+        let cache = JSON.parse(localStorage.getItem('cache') || '[]') || []
+        setTimeout(() => {
+            const time = new Date().toLocaleString();
+            timeDom.innerHTML = time;
+        }, 1000)
+        submit.addEventListener('click', () => {
+            let titleV = title.value, contentV = content.value;
+            if (titleV && contentV) {
+                cache = [...cache, { title: titleV, content: contentV, time: new Date() }]
+                localStorage.setItem('cache', JSON.stringify(cache))
+            } else {
+                alert('请输入标题和内容')
+            }
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="main">
+
+    </div>
+    <script>
+        const data = JSON.parse(localStorage.getItem('cache') || '[]');
+        const main=document.getElementById('main');
+        let str = ''
+        for (let i = 0; i < data.length; i++) {
+            const { time, title, content } = data[i]
+            str += `
+           <ul>
+            <li>
+                <span>留言标题</span>
+                <span>${title}</span>
+                </li>
+                <li>
+                <span>留言内容</span>
+                <span>${content}</span>
+                </li>
+                <li>
+                <span>留言时间</span>
+                <span>${time}</span>
+                </li>
+            </ul>
+           `
+        }
+        main.innerHTML=str
+
+    </script>
+</body>
+
+</html>
